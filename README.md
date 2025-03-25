@@ -35,7 +35,7 @@ A través de ejercicios prácticos, se explorarán temas avanzados para reforzar
 
 ## Join
 
-´´´sql
+```sql
 -- 1. Pedidos con nombres de clientes
 SELECT p.id as pedido_id, 
        c.nombre as cliente, 
@@ -45,7 +45,7 @@ SELECT p.id as pedido_id,
 FROM Pedidos p
 INNER JOIN Clientes c ON p.cliente_id = c.id
 INNER JOIN EstadosPedido ep ON p.estado_id = ep.id;
-´´´
+
 
 -- 2. Productos y sus proveedores
 SELECT p.nombre as producto, 
@@ -124,12 +124,12 @@ SELECT pr.nombre as proveedor,
 FROM Proveedores pr
 INNER JOIN Productos p ON pr.id = p.proveedor_id
 INNER JOIN TiposProductos tp ON p.tipo_id = tp.id;
-´´´
+```
 
 ---
 
 ## Consultas Simples
-
+```sql
 -- 1. Productos con precio mayor a $50  
 SELECT id, nombre, precio, proveedor_id, tipo_id  
 FROM Productos  
@@ -196,11 +196,11 @@ LEFT JOIN Pedidos p ON c.id = p.cliente_id
 GROUP BY c.id, c.nombre, c.email  
 ORDER BY total_pedidos DESC  
 LIMIT 1;
-
+```
 ---
 
 ## Consultas Multitabla
-
+```sql
 -- 1. Pedidos y cliente asociado  
 SELECT  
     p.id AS pedido_id,  
@@ -324,10 +324,10 @@ INNER JOIN DetallesPedido dp ON p.id = dp.producto_id
 GROUP BY pr.id, pr.nombre  
 ORDER BY ingreso_total DESC;
   
----
+```
 
 ## Subconsultas
-
+```sql
 -- 1. Producto más caro por categoría  
 SELECT  
     tp.tipo_nombre,  
@@ -466,11 +466,11 @@ WHERE p.precio > (
     FROM Productos  
 )  
 ORDER BY p.precio DESC;
-
+```
 ---
 
 ## Procedimientos Almacenados
-
+```sql
 -- 1. Actualizar precios de productos por proveedor  
 DELIMITER //  
 CREATE PROCEDURE ActualizarPreciosProveedor(  
@@ -715,11 +715,11 @@ BEGIN
     );  
 END //  
 DELIMITER ;
-
+```
 ---
 
 ## Funciones Definidas por el Usuario
-
+```sql
 -- 1. Función para calcular días transcurridos  
 DELIMITER //  
 CREATE FUNCTION DiasTranscurridos(fecha_inicio DATE)   
@@ -858,10 +858,10 @@ BEGIN
 END //  
 DELIMITER ;
 
----
+```
 
 ## Triggers
-
+```sql
 -- 1. Trigger para registrar cambios de salario  
 DELIMITER //  
 CREATE TRIGGER trg_registrar_cambio_salario  
@@ -1061,3 +1061,4 @@ BEGIN
     END IF;  
 END //  
 DELIMITER ;
+```
