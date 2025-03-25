@@ -11,15 +11,21 @@ INSERT INTO Ubicaciones (direccion, ciudad, estado, codigo_postal, pais) VALUES
 ('Av. Vallarta 1458', 'Guadalajara', 'Jalisco', '44100', 'México'),
 ('Av. Constitución 123', 'Monterrey', 'Nuevo León', '64000', 'México'),
 ('Paseo de la República 500', 'Querétaro', 'Querétaro', '76000', 'México'),
-('Blvd. Kukulcán 55', 'Cancún', 'Quintana Roo', '77500', 'México');
+('Blvd. Kukulcán 55', 'Cancún', 'Quintana Roo', '77500', 'México'),
+-- Nuevas ubicaciones para proveedores
+('Av. Industrial 789', 'Ciudad de México', 'CDMX', '01010', 'México'),
+('Blvd. Comercial 456', 'Guadalajara', 'Jalisco', '44200', 'México'),
+('Calle Negocios 123', 'Monterrey', 'Nuevo León', '64100', 'México'),
+('Av. Digital 777', 'Querétaro', 'Querétaro', '76100', 'México'),
+('Calle Proveedores 321', 'Cancún', 'Quintana Roo', '77600', 'México');
 
 -- Insertar clientes
-INSERT INTO Clientes (nombre, email) VALUES
-('Juan Pérez', 'juan.perez@email.com'),
-('María García', 'maria.garcia@email.com'),
-('Empresas XYZ', 'contacto@xyz.com'),
-('Roberto Gómez', 'roberto@email.com'),
-('Ana López', 'ana.lopez@email.com');
+INSERT INTO Clientes (nombre, email, tipo_cliente_id) VALUES
+('Juan Pérez', 'juan.perez@email.com', 1),
+('María García', 'maria.garcia@email.com', 1),
+('Empresas XYZ', 'contacto@xyz.com', 3),
+('Roberto Gómez', 'roberto@email.com', 2),
+('Ana López', 'ana.lopez@email.com', 1);
 
 -- Insertar ubicaciones de clientes en EntidadUbicacion
 INSERT INTO EntidadUbicacion (entidad_tipo, entidad_id, ubicacion_id) VALUES
@@ -54,12 +60,20 @@ INSERT INTO DatosEmpleados (empleado_id, puesto_id, salario, fecha_contratacion)
 (5, 5, 25000.00, '2022-03-01');
 
 -- Insertar proveedores
-INSERT INTO Proveedores (nombre, contacto, telefono, direccion) VALUES
-('Distribuidora Nacional', 'Roberto Gómez', '555-0101', 'Av. Industrial 789'),
-('Importaciones del Norte', 'Laura Sánchez', '555-0202', 'Blvd. Comercial 456'),
-('Mayorista Express', 'Pedro Ramírez', '555-0303', 'Calle Negocios 123'),
-('Tecnología Avanzada', 'Carmen Ortiz', '555-0404', 'Av. Digital 777'),
-('Suministros Rápidos', 'Jorge Díaz', '555-0505', 'Calle Proveedores 321');
+INSERT INTO Proveedores (nombre) VALUES
+('Distribuidora Nacional'),
+('Importaciones del Norte'),
+('Mayorista Express'),
+('Tecnología Avanzada'),
+('Suministros Rápidos');
+
+-- Insertar ubicaciones de proveedores
+INSERT INTO EntidadUbicacion (entidad_tipo, entidad_id, ubicacion_id) VALUES
+('proveedor', 1, 6),
+('proveedor', 2, 7),
+('proveedor', 3, 8),
+('proveedor', 4, 9),
+('proveedor', 5, 10);
 
 -- Insertar contactos de proveedores
 INSERT INTO ContactosProveedor (proveedor_id, nombre, cargo, email) VALUES
@@ -85,14 +99,6 @@ INSERT INTO TiposProductos (tipo_nombre, descripcion) VALUES
 ('Consumibles', 'Productos de uso frecuente'),
 ('Accesorios', 'Complementos varios');
 
--- Insertar productos
-INSERT INTO Productos (nombre, precio, proveedor_id, tipo_id) VALUES
-('Laptop HP Elite', 25000.00, 1, 1),
-('Monitor Dell 27"', 5000.00, 1, 1),
-('Escritorio Ejecutivo', 8500.00, 2, 3),
-('Silla Ergonómica', 4500.00, 2, 3),
-('Impresora Láser', 3500.00, 3, 1);
-
 -- Insertar estados de pedido
 INSERT INTO EstadosPedido (estado) VALUES
 ('Pendiente'),
@@ -109,6 +115,14 @@ INSERT INTO Pedidos (cliente_id, fecha, total, estado_id) VALUES
 (4, '2024-03-04', 4500.00, 4),
 (5, '2024-03-05', 3500.00, 1);
 
+-- Insertar productos con pedidos
+INSERT INTO Productos (nombre, precio, proveedor_id, tipo_id) VALUES
+('Laptop HP Elite', 25000.00, 1, 1),
+('Monitor Dell 27"', 5000.00, 1, 1),
+('Escritorio Ejecutivo', 8500.00, 2, 3),
+('Silla Ergonómica', 4500.00, 2, 3),
+('Impresora Láser', 3500.00, 3, 1);
+
 -- Insertar detalles de pedido
 INSERT INTO DetallesPedido (pedido_id, producto_id, cantidad, precio, precio_historico, fecha_precio) VALUES
 (1, 1, 1, 25000.00, 25000.00, '2024-03-01 10:00:00'),
@@ -116,6 +130,14 @@ INSERT INTO DetallesPedido (pedido_id, producto_id, cantidad, precio, precio_his
 (3, 3, 1, 8500.00, 8500.00, '2024-03-03 12:00:00'),
 (4, 4, 1, 4500.00, 4500.00, '2024-03-04 13:00:00'),
 (5, 5, 1, 3500.00, 3500.00, '2024-03-05 14:00:00');
+
+-- Insertar productos sin pedidos
+INSERT INTO Productos (nombre, precio, proveedor_id, tipo_id) VALUES
+('Teclado Mecánico RGB', 1200.00, 1, 1),
+('Mouse Gaming Pro', 800.00, 1, 1),
+('Silla Visitante', 2500.00, 2, 3),
+('Webcam HD', 950.00, 3, 1),
+('Disco Duro SSD 1TB', 1800.00, 4, 1);
 
 -- Insertar teléfonos
 INSERT INTO Telefonos (entidad_tipo, entidad_id, tipo_telefono, numero) VALUES
