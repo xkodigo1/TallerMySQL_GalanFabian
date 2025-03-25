@@ -164,3 +164,36 @@ CREATE TABLE EmpleadosProveedores (
     FOREIGN KEY (empleado_id) REFERENCES Empleados(id),
     FOREIGN KEY (proveedor_id) REFERENCES Proveedores(id)
 );
+
+-- Tabla para historial de salarios
+CREATE TABLE HistorialSalarios (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    empleado_id INT,
+    salario_anterior DECIMAL(10,2),
+    salario_nuevo DECIMAL(10,2),
+    fecha_modificacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    usuario_modificacion VARCHAR(50),
+    FOREIGN KEY (empleado_id) REFERENCES Empleados(id)
+);
+
+-- Tabla para log de actividades
+CREATE TABLE LogActividades (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    tabla VARCHAR(50),
+    tipo_operacion VARCHAR(20),
+    id_registro INT,
+    datos_anteriores TEXT,
+    datos_nuevos TEXT,
+    fecha_modificacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    usuario VARCHAR(50)
+);
+
+-- Tabla para historial de contratos
+CREATE TABLE HistorialContratos (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    empleado_id INT,
+    puesto_anterior VARCHAR(50),
+    puesto_nuevo VARCHAR(50),
+    fecha_modificacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (empleado_id) REFERENCES Empleados(id)
+);
