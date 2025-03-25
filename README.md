@@ -45,6 +45,7 @@ SELECT p.id as pedido_id,
 FROM Pedidos p
 INNER JOIN Clientes c ON p.cliente_id = c.id
 INNER JOIN EstadosPedido ep ON p.estado_id = ep.id;
+´´´
 
 -- 2. Productos y sus proveedores
 SELECT p.nombre as producto, 
